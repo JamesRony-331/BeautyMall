@@ -1,0 +1,40 @@
+// Static design examples only; no data is saved to the server.
+export const products = [
+  ['柔雾持色唇膏', '彩妆', '已上架', '198.00', 128],
+  ['水润保湿精华', '护肤', '已上架', '320.00', 86],
+  ['轻透柔光粉底液', '彩妆', '待上架', '268.00', 52],
+  ['木质调淡香水', '香氛', '已上架', '580.00', 34],
+  ['日间清透防晒乳', '护肤', '已上架', '188.00', 210],
+  ['舒润身体乳', '身体护理', '已下架', '156.00', 0],
+  ['自然双色眼影', '彩妆', '待上架', '228.00', 64],
+  ['轻盈滋润面霜', '护肤', '已上架', '298.00', 91],
+  ['花香随行香氛', '香氛', '已上架', '260.00', 48],
+  ['柔润护手霜', '身体护理', '已下架', '89.00', 12],
+  ['净澈洁面乳', '护肤', '已上架', '138.00', 156],
+  ['细腻定妆粉饼', '彩妆', '待上架', '238.00', 73],
+].map(([name, category, status, price, stock], index) => ({
+  id: `SP${String(index + 1).padStart(4, '0')}`,
+  name,
+  category,
+  status,
+  price,
+  stock,
+  image: '/images/beauty-editorial.jpg',
+  updated: '2026-10-30',
+}))
+export const categories = [
+  ['护肤', '洁面、精华与日常面部护理', '启用', 1],
+  ['彩妆', '底妆、唇妆与眼部彩妆', '启用', 2],
+  ['香氛', '香水与随行香氛', '启用', 3],
+  ['身体护理', '身体清洁与滋润护理', '启用', 4],
+  ['美妆工具', '化妆刷与日常美妆工具', '停用', 5],
+  ['礼盒套装', '组合套装与礼赠精选', '停用', 6],
+].map(([name, description, status, sort], index) => ({
+  id: `FL${String(index + 1).padStart(3, '0')}`,
+  name,
+  description,
+  status,
+  sort,
+  count: products.filter((p) => p.category === name).length,
+  updated: '2026-10-30',
+}))

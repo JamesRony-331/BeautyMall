@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzbc.BeautyMall.Mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.wzbc.BeautyMall.entity.PO.UserPO">
+        <id column="id" property="id"/>
+        <result column="password" property="password"/>
+        <result column="real_name" property="realName"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="avatar" property="avatar"/>
+        <result column="status" property="status"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="userColumns">
+        id, password, real_name, phone, email, avatar, status,
+        created_at, updated_at
+    </sql>
+
+    <insert id="insert" parameterType="com.wzbc.BeautyMall.entity.PO.UserPO"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO `sys_user`
+            (password, real_name, phone, email, avatar, status, created_at, updated_at)
+        VALUES
+            (#{password}, #{realName}, #{phone}, #{email}, #{avatar}, #{status},
+             #{createdAt}, #{updatedAt})
+    </insert>
+
+    <select id="selectById" resultMap="userResultMap">
+        SELECT <include refid="userColumns"/>
+        FROM `sys_user` WHERE id = #{id}
+    </select>
+
+    <select id="selectByEmail" resultMap="userResultMap">
+        SELECT <include refid="userColumns"/>
+        FROM `sys_user`
+        WHERE email = #{email}
+    </select>
+
+    <select id="selectPage" resultMap="userResultMap">
+        SELECT id, real_name, phone, email, avatar, status, created_at, updated_at
+        FROM `sys_user`
+        ORDER BY id DESC
+        LIMIT #{start}, #{pageSize}
+    </select>
+
+    <select id="countUsers" resultType="int">
+        SELECT COUNT(*) FROM `sys_user`
+    </select>
+
+    <update id="updateById">
+        UPDATE `sys_user`
+        <set>
+            <if test="password != null">password = #{password},</if>
+            <if test="realName != null">real_name = #{realName},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="status != null">status = #{status},</if>
+            updated_at = CURRENT_TIMESTAMP
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="disableById">
+        UPDATE `sys_user` SET status = 0, updated_at = CURRENT_TIMESTAMP
+        WHERE id = #{id} AND status != 0
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM `sys_user` WHERE id = #{id}
+    </delete>
+</mapper>

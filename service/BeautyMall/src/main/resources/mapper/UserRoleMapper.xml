@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzbc.BeautyMall.Mapper.UserRoleMapper">
+    <select id="lockUser" resultType="long">
+        SELECT id FROM sys_user WHERE id = #{userId} FOR UPDATE
+    </select>
+    <select id="countBinding" resultType="int">
+        SELECT COUNT(*) FROM sys_user_role WHERE user_id = #{userId} AND role_id = #{roleId}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO sys_user_role (user_id, role_id, created_at)
+        VALUES (#{userId}, #{roleId}, #{createdAt})
+    </insert>
+</mapper>

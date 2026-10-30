@@ -1,0 +1,29 @@
+{
+  "name": "beautymall",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.js",
+    "test:e2e": "playwright test",
+    "format:check": "prettier --check src/App.vue src/main.js src/style.css src/router src/views src/lib src/data src/components/AdminNavigation.vue src/components/StaticWorkspace.vue tests vite.config.js playwright.config.js"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "element-plus": "^2.14.7",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "prettier": "^3.9.10",
+    "vite": "^8.3.4"
+  },
+  "overrides": {
+    "vue-component-type-helpers": "3.3.13"
+  }
+}
