@@ -1,4 +1,4 @@
-# BeautyMall 美妆商城
+# BeautyMall 美妆商城（未完成）
 
 Vue 3 + Element Plus 客户端与管理端，Spring Boot 服务端。
 
